@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id='yeet'></h1>
+    <script>
+        let answer = ['I','R','I','S','C', 'H', 'O', 'W'];
+        let blanks = [];
+        for (let j = 0; j < answer.length; j++){
+            blanks.push('_');
+        }
+        
+        function makeButtons(){
+            for (let i = 65; i < 90; i++){
+                let btn = document.createElement("button");
+                document.body.appendChild(btn);
+                btn.innerHTML = String.fromCharCode(i);
+                btn.id = String.fromCharCode(i);
+                btn.addEventListener("click", function(){
+                    // console.log("Button " + String.fromCharCode(i) + " was clicked.")
+                    let userInput = String.fromCharCode(i)
+                    for (let i = 0; i < answer.length; i++){
+                        document.getElementById(userInput).disabled = true;
+                        if (userInput == answer[i]) {
+                            blanks[i] = userInput;
+                            document.getElementById('yeet').innerHTML = blanks.toString();
+                            if (!blanks.includes('_')){
+                                console.log("YOU GOT IT!");
+                            }                  
+                        }                        
+                    }   
+                    console.log("userInput: " + userInput);
+                    console.log("blanks: " + blanks);
+                })
+            }
+        }
+        makeButtons();
+        document.getElementById('yeet').innerHTML = blanks.toString();
+    </script>
+</body>
+</html>
