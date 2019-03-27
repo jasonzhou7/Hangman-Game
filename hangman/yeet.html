@@ -8,9 +8,11 @@
 </head>
 <body>
     <h1 id='yeet'></h1>
+    <h1 id='lives'></h1>
     <script>
-        let answer = ['I','R','I','S','C', 'H', 'O', 'W'];
+        let answer = ['I','R','I','S'];
         let blanks = [];
+        let lives = 7;
         for (let j = 0; j < answer.length; j++){
             blanks.push('_');
         }
@@ -30,9 +32,14 @@
                             blanks[i] = userInput;
                             document.getElementById('yeet').innerHTML = blanks.toString();
                             if (!blanks.includes('_')){
-                                console.log("YOU GOT IT!");
+                                window.alert("YOU GOT IT!");
                             }                  
-                        }                        
+                        }
+                        else if (userInput != answer[i]) {
+                            lives -= 1; 
+                            document.getElementById('yeet').innerHTML = blanks.toString();
+                            document.getElementById('lives').innerHTML = lives;
+                        }                               
                     }   
                     console.log("userInput: " + userInput);
                     console.log("blanks: " + blanks);
@@ -41,6 +48,7 @@
         }
         makeButtons();
         document.getElementById('yeet').innerHTML = blanks.toString();
+        document.getElementById('lives').innerHTML = lives;
     </script>
 </body>
 </html>
