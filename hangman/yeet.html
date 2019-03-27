@@ -29,6 +29,8 @@
                     // console.log("Button " + String.fromCharCode(i) + " was clicked.")
                     let userInput = String.fromCharCode(i)
                     console.log(userInput);
+                    
+                    // If you click something wrong, disables the button, -1 on life
                     if (!(answer.includes(userInput))) {
                         lives -= 1;
                         document.getElementById('yeet').innerHTML = cleanUp(blanks);
@@ -39,6 +41,7 @@
                             window.alert('You failed bitch');
                         }
                     }
+                    // If you click something right, disables the button, life same, if no more _, you win
                     else {
                         for (let i = 0; i < answer.length; i++) {
                             document.getElementById(userInput).disabled = true;
