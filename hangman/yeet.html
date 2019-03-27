@@ -30,14 +30,14 @@
                         document.getElementById(userInput).disabled = true;
                         if (userInput == answer[i]) {
                             blanks[i] = userInput;
-                            document.getElementById('yeet').innerHTML = blanks.toString();
+                            document.getElementById('yeet').innerHTML = cleanUp(blanks);
                             if (!blanks.includes('_')){
-                                window.alert("YOU GOT IT!");
+                                window.alert("YOU GOT IT! " + cleanUp(answer) + ' was the correct answer!');
                             }                  
                         }
                         else if (userInput != answer[i]) {
                             lives -= 1; 
-                            document.getElementById('yeet').innerHTML = blanks.toString();
+                            document.getElementById('yeet').innerHTML = cleanUp(blanks);
                             document.getElementById('lives').innerHTML = lives;
                         }                               
                     }   
@@ -46,8 +46,18 @@
                 })
             }
         }
+        
+        // Takes an array and converts to string with spaces
+        function cleanUp(shit){
+            clean = ''
+            for (let i = 0; i < shit.length; i++){
+                clean += shit[i] + ' ';
+            }
+            return clean
+        }
+
         makeButtons();
-        document.getElementById('yeet').innerHTML = blanks.toString();
+        document.getElementById('yeet').innerHTML = cleanUp(blanks);
         document.getElementById('lives').innerHTML = lives;
     </script>
 </body>
