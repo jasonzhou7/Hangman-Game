@@ -1,56 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+
 <body>
     <h1 id='yeet'></h1>
-    <h1 id='lives'></h1>
+    <h1 id='lives'>Lives: 7</h1>
     <script>
-        let answer = ['I','R','I','S'];
+        let answer = ['I', 'R', 'I', 'S'];
         let blanks = [];
         let lives = 7;
-        for (let j = 0; j < answer.length; j++){
+        for (let j = 0; j < answer.length; j++) {
             blanks.push('_');
         }
-        
-        function makeButtons(){
-            for (let i = 65; i < 90; i++){
+
+        function makeButtons() {
+            for (let i = 65; i < 90; i++) {
                 let btn = document.createElement("button");
                 document.body.appendChild(btn);
                 btn.innerHTML = String.fromCharCode(i);
                 btn.id = String.fromCharCode(i);
-                btn.addEventListener("click", function(){
+                btn.addEventListener("click", function () {
                     // console.log("Button " + String.fromCharCode(i) + " was clicked.")
                     let userInput = String.fromCharCode(i)
-                    for (let i = 0; i < answer.length; i++){
+                    console.log(userInput);
+                    if (!(answer.includes(userInput))) {
+                        lives -= 1;
+                        document.getElementById('yeet').innerHTML = cleanUp(blanks);
+                        document.getElementById('lives').innerHTML = "Lives: " + (lives);
                         document.getElementById(userInput).disabled = true;
-                        if (userInput == answer[i]) {
-                            blanks[i] = userInput;
-                            document.getElementById('yeet').innerHTML = cleanUp(blanks);
-                            if (!blanks.includes('_')){
-                                window.alert("YOU GOT IT! " + cleanUp(answer) + ' was the correct answer!');
-                            }                  
+                        console.log('That was a wrong letter');
+                        if (lives == 0) {
+                            window.alert('You failed bitch');
                         }
-                        else if (userInput != answer[i]) {
-                            lives -= 1; 
-                            document.getElementById('yeet').innerHTML = cleanUp(blanks);
-                            document.getElementById('lives').innerHTML = lives;
-                        }                               
-                    }   
+                    }
+                    else {
+                        for (let i = 0; i < answer.length; i++) {
+                            document.getElementById(userInput).disabled = true;
+                            if (userInput == answer[i]) {
+                                blanks[i] = userInput;
+                                document.getElementById('yeet').innerHTML = cleanUp(blanks);
+                                if (!blanks.includes('_')) {
+                                    window.alert("YOU GOT IT! " + cleanUp(answer) + ' was the correct answer!');
+                                }
+                            }
+                            //else if (!(userInput in answer)) {
+                            //    lives -= 1; 
+                            //    document.getElementById('yeet').innerHTML = cleanUp(blanks);
+                            //    document.getElementById('lives').innerHTML = "Lives: " + (lives);
+                            //}                               
+                        }
+                    }
                     console.log("userInput: " + userInput);
                     console.log("blanks: " + blanks);
                 })
             }
         }
-        
+
         // Takes an array and converts to string with spaces
-        function cleanUp(shit){
+        function cleanUp(shit) {
             clean = ''
-            for (let i = 0; i < shit.length; i++){
+            for (let i = 0; i < shit.length; i++) {
                 clean += shit[i] + ' ';
             }
             return clean
@@ -58,7 +73,8 @@
 
         makeButtons();
         document.getElementById('yeet').innerHTML = cleanUp(blanks);
-        document.getElementById('lives').innerHTML = lives;
+        document.getElementById('lives').innerHTML = "Lives: " + (lives);
     </script>
 </body>
+
 </html>
